@@ -51,7 +51,7 @@ function getFormattedSeconds() {
    getFormattedMinutes/Seconds() and the renderTime() function.
    It essentially resets our timer */
 function setTime() {
-  var minutes = 1;
+  var minutes = 60;
   clearInterval(interval);
   totalSeconds = minutes * 60;
 };
@@ -104,7 +104,7 @@ function startTimer() {
       secondsElapsed++;
       console.log(secondsElapsed) // ** Remove before saving // **
 
-      if (secondsElapsed % 30 == 0) {
+      if (secondsElapsed % 60 == 0) {
 
         console.log("\n\n\n\n NEXT SONG. DRINK!\n\n");
 
@@ -173,16 +173,16 @@ function getSongs(id) {
     url: "/api/playlist/songs/" + id,
   }).then(function (res) {
     console.log(res[0]);
-
+    $("#playlist-songs").empty();
     // Grab the template script
     var source = $("#playlist-songs-template").html();
       
     // Compile the template
     var template = Handlebars.compile(source);
 
-
     for (let i = 0; i < res.length; i++) {
-      
+      console.log('test');
+
         // Define our data object
         var songs = {
           "id": res[i].id,
